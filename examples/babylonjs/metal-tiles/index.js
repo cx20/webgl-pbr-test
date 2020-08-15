@@ -37,16 +37,15 @@ var createScene = function(engine) {
         ["px.jpg", "py.jpg", "pz.jpg", "nx.jpg", "ny.jpg", "nz.jpg"]
     );
     scene.createDefaultSkybox(cubeTexture, true, 10000);
-    var urlBase = "https://rawcdn.githack.com/cx20/jsdo-static-contents/89194aefe92cf7111cbac116f6f0bfb194b65503/";
-
+    var urlBase = "https://rawcdn.githack.com/cx20/jsdo-static-contents/2e26d2e3787eef8301ec72393978d3d835024a3c/";
+/*
     // https://www.cgbookcase.com/textures/brick-wall-02
     var textureAO         = new BABYLON.Texture(urlBase + 'textures/Brick_wall_02_1K_AO.jpg', scene);
     var textureBase_Color = new BABYLON.Texture(urlBase + 'textures/Brick_wall_02_1K_Base_Color.jpg', scene);
     var textureHeight     = new BABYLON.Texture(urlBase + 'textures/Brick_wall_02_1K_Height.jpg', scene);
     var textureNormal     = new BABYLON.Texture(urlBase + 'textures/Brick_wall_02_1K_Normal.jpg', scene);
-    //var textureRoughness  = new BABYLON.Texture(urlBase + 'textures/Brick_wall_02_1K_Roughness.jpg', scene);
-    var textureRoughness  = new BABYLON.Texture(urlBase + 'textures/Brick_wall_02_1K_ORM.jpg', scene);
-/*
+    var textureRoughness  = new BABYLON.Texture(urlBase + 'textures/Brick_wall_02_1K_Roughness.jpg', scene);
+*/
     // https://www.cgbookcase.com/textures/metal-tiles-03
     var textureAO         = new BABYLON.Texture(urlBase + 'textures/Metal_tiles_03_1K_AO.jpg', scene);
     var textureBase_Color = new BABYLON.Texture(urlBase + 'textures/Metal_tiles_03_1K_Base_Color.jpg', scene);
@@ -54,7 +53,7 @@ var createScene = function(engine) {
     var textureMetallic   = new BABYLON.Texture(urlBase + 'textures/Metal_tiles_03_1K_Metallic.jpg', scene);
     var textureNormal     = new BABYLON.Texture(urlBase + 'textures/Metal_tiles_03_1K_Normal.jpg', scene);
     var textureRoughness  = new BABYLON.Texture(urlBase + 'textures/Metal_tiles_03_1K_Roughness.jpg', scene);
-*/
+
     cube = BABYLON.MeshBuilder.CreateBox('box', {height: 2, width: 2, depth: 2}, scene);
     //cube.position = new BABYLON.Vector3(0, 0, 2); 
     
