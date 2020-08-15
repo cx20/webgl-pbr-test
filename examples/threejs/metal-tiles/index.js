@@ -67,10 +67,10 @@ function init() {
       normalScale: new THREE.Vector2(-1, -1),
       metalnessMap: textureMetallic,
       roughnessMap: textureRoughness,
-      envMap: envMap
+      //envMap: envMap
     } );
     
-    scene.background = envMap;
+    //scene.background = envMap;
     var cube = new THREE.Mesh( geometry, material );
     scene.add( cube );
 

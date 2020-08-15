@@ -63,10 +63,10 @@ function init() {
       //metalnessMap: textureMetallic,
       roughnessMap: textureRoughness,
       metalness: 0.0,
-      envMap: envMap
+      //envMap: envMap
     } );
     
-    scene.background = envMap;
+    //scene.background = envMap;
     var cube = new THREE.Mesh( geometry, material );
     scene.add( cube );
 

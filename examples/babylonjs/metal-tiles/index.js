@@ -36,7 +36,7 @@ var createScene = function(engine) {
         scene,
         ["px.jpg", "py.jpg", "pz.jpg", "nx.jpg", "ny.jpg", "nz.jpg"]
     );
-    scene.createDefaultSkybox(cubeTexture, true, 10000);
+    //scene.createDefaultSkybox(cubeTexture, true, 10000);
     var urlBase = "https://rawcdn.githack.com/cx20/jsdo-static-contents/2e26d2e3787eef8301ec72393978d3d835024a3c/";
 /*
     // https://www.cgbookcase.com/textures/brick-wall-02
