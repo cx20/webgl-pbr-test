@@ -40,27 +40,15 @@ function init() {
     var textureHeight     = loader.load(urlBase + 'textures/Brick_wall_02_1K_Height.jpg');
     var textureNormal     = loader.load(urlBase + 'textures/Brick_wall_02_1K_Normal.jpg');
     var textureRoughness  = loader.load(urlBase + 'textures/Brick_wall_02_1K_Roughness.jpg');
-/*
-    // https://www.cgbookcase.com/textures/metal-tiles-03
-    var textureAO         = loader.load(urlBase + 'textures/Metal_tiles_03_1K_AO.jpg');
-    var textureBase_Color = loader.load(urlBase + 'textures/Metal_tiles_03_1K_Base_Color.jpg');
-    var textureHeight     = loader.load(urlBase + 'textures/Metal_tiles_03_1K_Height.jpg');
-    var textureMetallic   = loader.load(urlBase + 'textures/Metal_tiles_03_1K_Metallic.jpg');
-    var textureNormal     = loader.load(urlBase + 'textures/Metal_tiles_03_1K_Normal.jpg');
-    var textureRoughness  = loader.load(urlBase + 'textures/Metal_tiles_03_1K_Roughness.jpg');
-*/
     
     var envMap = getEnvMap();
     
     var geometry = new THREE.BoxGeometry(1, 1, 1);
     var material = new THREE.MeshStandardMaterial( {
-      //color: 0xffffff,
-      //aoMap: textureAO,
       map: textureBase_Color,
       bumpMap: textureHeight,
       normalMap: textureNormal,
       normalScale: new THREE.Vector2(-1, -1),
-      //metalnessMap: textureMetallic,
       roughnessMap: textureRoughness,
       metalness: 0.0,
       //envMap: envMap
