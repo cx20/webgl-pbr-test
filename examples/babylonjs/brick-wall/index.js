@@ -1,14 +1,3 @@
-// forked from cx20's "[WebGL] Babylon.js  で PBR を試してみるテスト（その２）（調整中）" http://jsdo.it/cx20/UDOz
-// forked from cx20's "[WebGL] Babylon.js  で PBR を試してみるテスト（調整中）" http://jsdo.it/cx20/ebAu
-// forked from cx20's "[WebGL] Babylon.js のプリミティブ型を試してみるテスト（パラメータオプション形式編）" http://jsdo.it/cx20/WZ1p
-// forked from cx20's "[WebGL] Babylon.js のプリミティブ型を試してみるテスト" http://jsdo.it/cx20/ayyF
-// forked from cx20's "[WebGL] Babylon.js を試してみるテスト（組み込み関数編）（その４）" http://jsdo.it/cx20/jwt0
-// forked from cx20's "[WebGL] Babylon.js を試してみるテスト（組み込み関数編）（その３）" http://jsdo.it/cx20/uqcv
-// forked from cx20's "[WebGL] Babylon.js を試してみるテスト（組み込み関数編）（その２）" http://jsdo.it/cx20/anpf
-// forked from cx20's "[WebGL] Babylon.js を試してみるテスト（組み込み関数編）" http://jsdo.it/cx20/oRtWo
-// forked from cx20's "[WebGL] Babylon.js を試してみるテスト" http://jsdo.it/cx20/84AP
-// forked from cx20's "[簡易版] 30行で WebGL を試してみるテスト" http://jsdo.it/cx20/oaQC
-
 var plane;
 var cube;
 var sphere;

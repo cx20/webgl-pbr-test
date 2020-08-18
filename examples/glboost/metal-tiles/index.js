@@ -1,15 +1,3 @@
-// forked from cx20's "[WebGL] GLBoost で PBR を試してみるテスト（その２）（調整中）" http://jsdo.it/cx20/E756
-// forked from cx20's "[WebGL] GLBoost で PBR を試してみるテスト（調整中）" http://jsdo.it/cx20/YYjT
-// forked from cx20's "[WebGL] GLBoost のプリミティブ型を試してみるテスト" http://jsdo.it/cx20/MaoR
-// forked from cx20's "[WebGL] GLBoost を試してみるテスト（組み込み関数編）（その４）" http://jsdo.it/cx20/yy3I
-// forked from cx20's "[WebGL] GLBoost を試してみるテスト（組み込み関数編）（その３）（仮）" http://jsdo.it/cx20/WlZW
-// forked from cx20's "[WebGL] GLBoost を試してみるテスト（組み込み関数編）（その２）（仮）" http://jsdo.it/cx20/8PA0
-// forked from cx20's "[WebGL] GLBoost を試してみるテスト（組み込み関数編）（仮）" http://jsdo.it/cx20/g9yj
-// forked from cx20's "[WebGL] GLBoost を試してみるテスト（standalone編）" http://jsdo.it/cx20/KXXM
-// forked from cx20's "[WebGL] GLBoost を試してみるテスト（phina.js編）" http://jsdo.it/cx20/SmrF
-// forked from cx20's "[WebGL] GLBoost を試してみるテスト" http://jsdo.it/cx20/SWec
-// forked from cx20's "[簡易版] 30行で WebGL を試してみるテスト" http://jsdo.it/cx20/oaQC
-
 let width = window.innerWidth;
 let height = window.innerHeight;
 // setup GLBoost renderer
@@ -52,7 +40,6 @@ material.setTexture(textureNormal, GLBoost.TEXTURE_PURPOSE_NORMAL);
 material.setTexture(textureRoughness, GLBoost.TEXTURE_PURPOSE_METALLIC_ROUGHNESS);
 
 var meshCube = glBoostContext.createMesh(geometryCube, material);
-//meshSphere.translate = new GLBoost.Vector3((r-0.5)*4, (m-0.5)*4, 0.0);
 
 scene.addChild(meshCube);
 
@@ -60,9 +47,7 @@ let pointLight = glBoostContext.createPointLight(new GLBoost.Vector3(1.0, 1.0, 1
 pointLight.translate = new GLBoost.Vector3(10, 10, 10);
 scene.addChild(pointLight);
 
-//var directionalLight = glBoostContext.createDirectionalLight(new GLBoost.Vector3(1, 1, 1), new GLBoost.Vector3(0, 0, -1));
 var directionalLight = glBoostContext.createDirectionalLight(new GLBoost.Vector3(1, 1, 1), new GLBoost.Vector3(90, 0, 0));
-//directionalLight.rotate = new GLBoost.Vector3(90,0,0);
 scene.addChild( directionalLight );
 
 var camera = glBoostContext.createPerspectiveCamera({

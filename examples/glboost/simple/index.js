@@ -45,8 +45,6 @@ for(let r = 0.0; r <= 1.0; r += 0.25) {
     for(let m = 0.0; m <= 1.0; m += 0.25) {
         // setup material
         let material = glBoostContext.createPBRMetallicRoughnessMaterial();
-        //let texture = glBoostContext.createTexture('http://jsrun.it/assets/U/L/K/7/ULK7v.jpg');
-        //material.setTexture(texture);
         material.baseColor = new GLBoost.Vector3(1.0, 1.0, 1.0);
         material.metallic = m;
         material.roughness = r;
@@ -59,9 +57,7 @@ for(let r = 0.0; r <= 1.0; r += 0.25) {
 }
 
 
-//let directionalLight = glBoostContext.createDirectionalLight(new GLBoost.Vector3(1, 1, 1), new GLBoost.Vector3(0, 0, -1));
 let directionalLight = glBoostContext.createDirectionalLight(new GLBoost.Vector3(1, 1, 1), new GLBoost.Vector3(90, 0, 0));
-//directionalLight.rotate = new GLBoost.Vector3(90,0,0);
 scene.addChild( directionalLight );
 
 let camera = glBoostContext.createPerspectiveCamera({
