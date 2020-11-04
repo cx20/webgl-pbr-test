@@ -1,3 +1,7 @@
+const c = document.getElementById('world');
+c.width = window.innerWidth;
+c.height = window.innerHeight;
+
 function generateEntity() {
     const repo = Rn.EntityRepository.getInstance();
     const entity = repo.createEntity([Rn.TransformComponent, Rn.SceneGraphComponent, Rn.MeshComponent, Rn.MeshRendererComponent]);
@@ -38,7 +42,7 @@ function createSpherePrimitive(roughnessFactor, metallicFactor) {
 const promise = Rn.ModuleManager.getInstance().loadModule('webgl');
 promise.then(function() {
     const system = Rn.System.getInstance();
-    const c = document.getElementById('world');
+    //const c = document.getElementById('world');
     //const gl = system.setProcessApproachAndCanvas(Rn.ProcessApproach.UniformWebGL1, c);
     const gl = system.setProcessApproachAndCanvas(Rn.ProcessApproach.FastestWebGL1, c);
     gl.enable(gl.DEPTH_TEST);
@@ -60,12 +64,16 @@ promise.then(function() {
 
     const entities = [];
     
-    //       [Metal] ^ 1.0
-    //               |
-    //               |
-    //   [Non-metal] v 0.0             1.0
-    //                 <---------------->
-    //            [Smooth]            [Rough]
+    // Metal/Roughness
+    // 
+    //     [Metal] ^ 1.0
+    //             |
+    //             |
+    //             |
+    //             |
+    // [Non-metal] | 0.0          1.0
+    //             +--------------->
+    //          [Smooth]         [Rough]
     for(let r = 0.0; r <= 1.0; r += 0.25) {
         for(let m = 0.0; m <= 1.0; m += 0.25) {
             // setup material
