@@ -27,10 +27,11 @@ var createScene = function(engine) {
             sphere.position = new BABYLON.Vector3((r-0.5)*4, (m-0.5)*4, 0); 
             
             var pbr = new BABYLON.PBRMaterial("pbr", scene);
-            pbr.baseColor = new BABYLON.Color3(1.0, 1.0, 1.0);
+            pbr.albedoColor = new BABYLON.Color3(1.0, 1.0, 1.0);
+            
             pbr.metallic = m;
             pbr.roughness = r;
-            
+
             sphere.material = pbr;
         }
     }
