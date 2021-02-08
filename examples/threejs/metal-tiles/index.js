@@ -2,37 +2,25 @@ var container;
 var camera, scene, renderer;
 var meshSphere;
 
+// dat.gui
+var gui;
+var ROTATE = true;
+
 init();
 animate();
 
 function init() {
     container = document.getElementById('container');
+    gui = new dat.GUI();
+    
     camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 1000);
     camera.position.z = 3;
     scene = new THREE.Scene();
     
-    var hemispheric = new THREE.HemisphereLight( 0xffffff, 0x222222, 1.0 );
-    scene.add(hemispheric);
-
-    var ambient = new THREE.AmbientLight( 0xffffff, 0.3 );
-    scene.add( ambient );
-
-/*
-    var light = new THREE.DirectionalLight(0xffffff);
-    light.position.set(0, 0, 1).normalize();
-    scene.add( light );
-*/
     var loader = new THREE.TextureLoader();
     loader.setCrossOrigin( 'anonymous' );
     var urlBase = "https://rawcdn.githack.com/cx20/jsdo-static-contents/2e26d2e3787eef8301ec72393978d3d835024a3c/";
-/*
-    // https://www.cgbookcase.com/textures/brick-wall-02
-    var textureAO         = loader.load(urlBase + 'textures/Brick_wall_02_1K_AO.jpg');
-    var textureBase_Color = loader.load(urlBase + 'textures/Brick_wall_02_1K_Base_Color.jpg');
-    var textureHeight     = loader.load(urlBase + 'textures/Brick_wall_02_1K_Height.jpg');
-    var textureNormal     = loader.load(urlBase + 'textures/Brick_wall_02_1K_Normal.jpg');
-    var textureRoughness  = loader.load(urlBase + 'textures/Brick_wall_02_1K_Roughness.jpg');
-*/
+
     // https://www.cgbookcase.com/textures/metal-tiles-03
     var textureAO         = loader.load(urlBase + 'textures/Metal_tiles_03_1K_AO.jpg');
     var textureBase_Color = loader.load(urlBase + 'textures/Metal_tiles_03_1K_Base_Color.jpg');
@@ -41,26 +29,16 @@ function init() {
     var textureNormal     = loader.load(urlBase + 'textures/Metal_tiles_03_1K_Normal.jpg');
     var textureRoughness  = loader.load(urlBase + 'textures/Metal_tiles_03_1K_Roughness.jpg');
     
-    var envMap = getEnvMap();
-    
     var geometry = new THREE.BoxGeometry(1, 1, 1);
-    //var geometry = new THREE.BoxGeometry(1, 1, 1, 256, 256, 256); // displacementMap を使用する場合 
     var material = new THREE.MeshStandardMaterial( {
-      //color: 0xffffff,
-      //aoMap: textureAO,
       map: textureBase_Color,
       bumpMap: textureHeight,
-      //bumpMapScale: 0.5,
-      //displacementMap: textureHeight,
-      //displacementScale: 0.1,
       normalMap: textureNormal,
       normalScale: new THREE.Vector2(-1, -1),
       metalnessMap: textureMetallic,
-      roughnessMap: textureRoughness,
-      //envMap: envMap
+      roughnessMap: textureRoughness
     } );
     
-    //scene.background = envMap;
     var cube = new THREE.Mesh( geometry, material );
     scene.add( cube );
 
@@ -74,27 +52,57 @@ function init() {
     controls.userPanSpeed = 0.0;
     controls.maxDistance = 5000.0;
     controls.maxPolarAngle = Math.PI * 0.495;
-    controls.autoRotate = true;     //true:自動回転する,false:自動回転しない
+    controls.autoRotate = ROTATE;     //true:自動回転する,false:自動回転しない
     controls.autoRotateSpeed = 2.0;    //自動回転する時の速度
-
-}
-
-// https://github.com/mrdoob/three.js/tree/dev/examples/textures/cube/skybox
-function getEnvMap() {
-    var path = 'https://rawcdn.githack.com/cx20/gltf-test/7c5f5eddf9e204d9bcbbc6ac06e610bc261fecc1/textures/cube/skybox/';
-    var format = '.jpg';
-    var urls = [
-        path + 'px' + format, path + 'nx' + format,
-        path + 'py' + format, path + 'ny' + format,
-        path + 'pz' + format, path + 'nz' + format
+    
+    var guiRotate = gui.add(window, 'ROTATE').name('Rotate');
+    guiRotate.onChange(function (value) {
+        controls.autoRotate = value;
+    });
+    
+    const hdrUrls = [
+        'specular_right_0.hdr',
+        'specular_left_0.hdr',
+        'specular_top_0.hdr',
+        'specular_bottom_0.hdr',
+        'specular_front_0.hdr',
+        'specular_back_0.hdr'
     ];
-    var loader = new THREE.CubeTextureLoader();
-    loader.setCrossOrigin( 'anonymous' );
-    var envMap = loader.load( urls );
-    envMap.format = THREE.RGBFormat;
-    return envMap;
+    hdrCubeMap = new THREE.HDRCubeTextureLoader()
+        .setPath( 'https://rawcdn.githack.com/ux3d/glTF-Sample-Environments/4eace30f795fa77f6e059e3b31aa640c08a82133/papermill/specular/' )
+        .setDataType( THREE.UnsignedByteType )
+        .load( hdrUrls, function () {
+
+            let pmremGenerator = new THREE.PMREMGenerator( renderer );
+            pmremGenerator.compileCubemapShader();
+
+            hdrCubeRenderTarget = pmremGenerator.fromCubemap( hdrCubeMap );
+
+            hdrCubeMap.magFilter = THREE.LinearFilter;
+            hdrCubeMap.needsUpdate = true;
+
+            renderTarget = hdrCubeRenderTarget;
+            cubeMap = hdrCubeMap;
+
+            let newEnvMap = renderTarget ? renderTarget.texture : null;
+            applyEnvMap(scene, newEnvMap);
+        } );
 }
 
+function applyEnvMap(object, envMap) {
+    object.traverse( function( node ) {
+        if ( node.isMesh ) {
+            let materials = Array.isArray( node.material ) ? node.material : [ node.material ];
+            materials.forEach( function( material ) {
+                // MeshBasicMaterial means that KHR_materials_unlit is set, so reflections are not needed.
+                if ( 'envMap' in material && !material.isMeshBasicMaterial ) {
+                    material.envMap = envMap;
+                    material.needsUpdate = true;
+                }
+            } );
+        }
+    } );
+}
 
 function animate() {
     requestAnimationFrame(animate);
@@ -104,8 +112,6 @@ function animate() {
 var rad = 0.0;
 function render() {
     rad += Math.PI * 1.0 / 180.0
-
-    //meshSphere.rotation.y = rad;
 
     renderer.render(scene, camera);
 
