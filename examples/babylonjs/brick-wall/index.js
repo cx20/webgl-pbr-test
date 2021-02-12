@@ -26,13 +26,14 @@ var createScene = function(engine) {
         ["px.jpg", "py.jpg", "pz.jpg", "nx.jpg", "ny.jpg", "nz.jpg"]
     );
     //scene.createDefaultSkybox(cubeTexture, true, 10000);
-    var urlBase = "https://rawcdn.githack.com/cx20/jsdo-static-contents/89194aefe92cf7111cbac116f6f0bfb194b65503/";
+    var urlBase = "https://rawcdn.githack.com/cx20/jsdo-static-contents/8cd7501598ce19e07fb3028b0d8ba4a29299c17a/";
 
     // https://www.cgbookcase.com/textures/brick-wall-02
     var textureAO         = new BABYLON.Texture(urlBase + 'textures/Brick_wall_02_1K_AO.jpg', scene);
     var textureBase_Color = new BABYLON.Texture(urlBase + 'textures/Brick_wall_02_1K_Base_Color.jpg', scene);
     var textureHeight     = new BABYLON.Texture(urlBase + 'textures/Brick_wall_02_1K_Height.jpg', scene);
-    var textureNormal     = new BABYLON.Texture(urlBase + 'textures/Brick_wall_02_1K_Normal.jpg', scene);
+    //var textureNormal     = new BABYLON.Texture(urlBase + 'textures/Brick_wall_02_1K_Normal.jpg', scene);
+    var textureNormal     = new BABYLON.Texture(urlBase + 'textures/Brick_wall_02_1K_Normal_InvertY.jpg', scene);
     //var textureRoughness  = new BABYLON.Texture(urlBase + 'textures/Brick_wall_02_1K_Roughness.jpg', scene);
     var textureRoughness  = new BABYLON.Texture(urlBase + 'textures/Brick_wall_02_1K_ORM.jpg', scene);
 

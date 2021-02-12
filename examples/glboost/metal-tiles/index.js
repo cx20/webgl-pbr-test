@@ -22,7 +22,7 @@ var geometryCube = glBoostContext.createCube(new GLBoost.Vector3(3, 3, 3), new G
 // setup material
 var material = glBoostContext.createPBRMetallicRoughnessMaterial();
 material.shaderClass = GLBoost.PBRPrincipledShader;
-var urlBase = "https://rawcdn.githack.com/cx20/jsdo-static-contents/2e26d2e3787eef8301ec72393978d3d835024a3c/";
+var urlBase = "https://rawcdn.githack.com/cx20/jsdo-static-contents/8cd7501598ce19e07fb3028b0d8ba4a29299c17a/";
 /*
 var texture          = glBoostContext.createTexture(urlBase + 'textures/Brick_wall_02_1K_Base_Color.jpg');
 var textureAO        = glBoostContext.createTexture(urlBase + 'textures/Brick_wall_02_1K_AO.jpg');
@@ -32,6 +32,7 @@ var textureRoughness = glBoostContext.createTexture(urlBase + 'textures/Brick_wa
 var texture          = glBoostContext.createTexture(urlBase + 'textures/Metal_tiles_03_1K_Base_Color.jpg');
 var textureAO        = glBoostContext.createTexture(urlBase + 'textures/Metal_tiles_03_1K_AO.jpg');
 var textureNormal    = glBoostContext.createTexture(urlBase + 'textures/Metal_tiles_03_1K_Normal.jpg');
+//var textureNormal    = glBoostContext.createTexture(urlBase + 'textures/Metal_tiles_03_1K_Normal_InvertY.jpg');
 var textureRoughness = glBoostContext.createTexture(urlBase + 'textures/Metal_tiles_03_1K_Roughness.jpg');
 
 material.setTexture(texture);

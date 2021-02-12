@@ -19,14 +19,15 @@ function init() {
     
     var loader = new THREE.TextureLoader();
     loader.setCrossOrigin( 'anonymous' );
-    var urlBase = "https://rawcdn.githack.com/cx20/jsdo-static-contents/2e26d2e3787eef8301ec72393978d3d835024a3c/";
+    var urlBase = "https://rawcdn.githack.com/cx20/jsdo-static-contents/8cd7501598ce19e07fb3028b0d8ba4a29299c17a/";
 
     // https://www.cgbookcase.com/textures/metal-tiles-03
     var textureAO         = loader.load(urlBase + 'textures/Metal_tiles_03_1K_AO.jpg');
     var textureBase_Color = loader.load(urlBase + 'textures/Metal_tiles_03_1K_Base_Color.jpg');
     var textureHeight     = loader.load(urlBase + 'textures/Metal_tiles_03_1K_Height.jpg');
     var textureMetallic   = loader.load(urlBase + 'textures/Metal_tiles_03_1K_Metallic.jpg');
-    var textureNormal     = loader.load(urlBase + 'textures/Metal_tiles_03_1K_Normal.jpg');
+    //var textureNormal     = loader.load(urlBase + 'textures/Metal_tiles_03_1K_Normal.jpg');
+    var textureNormal     = loader.load(urlBase + 'textures/Metal_tiles_03_1K_Normal_InvertY.jpg');
     var textureRoughness  = loader.load(urlBase + 'textures/Metal_tiles_03_1K_Roughness.jpg');
     
     var geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -34,7 +35,7 @@ function init() {
       map: textureBase_Color,
       bumpMap: textureHeight,
       normalMap: textureNormal,
-      normalScale: new THREE.Vector2(-1, -1),
+      normalScale: new THREE.Vector2(1, 1),
       metalnessMap: textureMetallic,
       roughnessMap: textureRoughness
     } );
