@@ -32,13 +32,15 @@ var createScene = function(engine) {
     var textureAO         = new BABYLON.Texture(urlBase + 'Brick_wall_02_1K_AO.jpg', scene);
     var textureBase_Color = new BABYLON.Texture(urlBase + 'Brick_wall_02_1K_Base_Color.jpg', scene);
     var textureHeight     = new BABYLON.Texture(urlBase + 'Brick_wall_02_1K_Height.jpg', scene);
-    //var textureNormal     = new BABYLON.Texture(urlBase + 'Brick_wall_02_1K_Normal.jpg', scene);
-    var textureNormal     = new BABYLON.Texture(urlBase + 'Brick_wall_02_1K_Normal_InvertY.jpg', scene);
+    var textureNormal     = new BABYLON.Texture(urlBase + 'Brick_wall_02_1K_Normal.jpg', scene);
+    //var textureNormal     = new BABYLON.Texture(urlBase + 'Brick_wall_02_1K_Normal_InvertY.jpg', scene);
     //var textureRoughness  = new BABYLON.Texture(urlBase + 'Brick_wall_02_1K_Roughness.jpg', scene);
     var textureRoughness  = new BABYLON.Texture(urlBase + 'Brick_wall_02_1K_ORM.jpg', scene);
 
     cube = BABYLON.MeshBuilder.CreateBox('box', {height: 2, width: 2, depth: 2}, scene);
     //cube.position = new BABYLON.Vector3(0, 0, 2); 
+
+    textureNormal.invertY = true;
     
     var pbr = new BABYLON.PBRMetallicRoughnessMaterial("pbr", scene);
     pbr.baseTexture = textureBase_Color;
