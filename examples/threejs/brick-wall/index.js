@@ -17,20 +17,20 @@ function init() {
     camera.position.z = 3;
     scene = new THREE.Scene();
 
-	var light = new THREE.HemisphereLight( 0xffffff, 0x0f0e0d, 1.00 );
+    var light = new THREE.HemisphereLight( 0xffffff, 0x0f0e0d, 1.00 );
     scene.add( light );
         
     var loader = new THREE.TextureLoader();
     loader.setCrossOrigin( 'anonymous' );
-    var urlBase = "https://rawcdn.githack.com/cx20/jsdo-static-contents/8cd7501598ce19e07fb3028b0d8ba4a29299c17a/";
+    var urlBase = "../../../assets/textures/brick-wall-02/";
 
     // https://www.cgbookcase.com/textures/brick-wall-02
-    var textureAO         = loader.load(urlBase + 'textures/Brick_wall_02_1K_AO.jpg');
-    var textureBase_Color = loader.load(urlBase + 'textures/Brick_wall_02_1K_Base_Color.jpg');
-    //var textureHeight     = loader.load(urlBase + 'textures/Brick_wall_02_1K_Height.jpg');
-    //var textureNormal     = loader.load(urlBase + 'textures/Brick_wall_02_1K_Normal.jpg');
-    var textureNormal     = loader.load(urlBase + 'textures/Brick_wall_02_1K_Normal_InvertY.jpg');
-    var textureRoughness  = loader.load(urlBase + 'textures/Brick_wall_02_1K_Roughness.jpg');
+    var textureAO         = loader.load(urlBase + 'Brick_wall_02_1K_AO.jpg');
+    var textureBase_Color = loader.load(urlBase + 'Brick_wall_02_1K_Base_Color.jpg');
+    //var textureHeight     = loader.load(urlBase + 'Brick_wall_02_1K_Height.jpg');
+    //var textureNormal     = loader.load(urlBase + 'Brick_wall_02_1K_Normal.jpg');
+    var textureNormal     = loader.load(urlBase + 'Brick_wall_02_1K_Normal_InvertY.jpg');
+    var textureRoughness  = loader.load(urlBase + 'Brick_wall_02_1K_Roughness.jpg');
     
     var geometry = new THREE.BoxGeometry(1*0.4, 1*0.4, 1*0.4);
     var material = new THREE.MeshStandardMaterial( {
@@ -43,7 +43,7 @@ function init() {
     } );
     
     var cube = new THREE.Mesh( geometry, material );
-	cube.position.set(-0.2, 0, 0);
+    cube.position.set(-0.2, 0, 0);
     scene.add( cube );
 
     renderer = new THREE.WebGLRenderer();
@@ -64,49 +64,49 @@ function init() {
         controls.autoRotate = value;
     });
 
-//---------------------------------------------
+/*
     let gltfLoader = new THREE.GLTFLoader();
     gltfLoader.setCrossOrigin('anonymous');
 
     let url = "https://rawcdn.githack.com/cx20/jsdo-static-contents/31bbf2c5bc78da9b27b2cd9842ffab8574aaf327/models/gltf/2.0/BrickWall/BrickWall.glb";
     gltfLoader.load(url, function(data) {
-    	let object = data.scene;
-    	let scale = 0.2;
-    	object.scale.set(scale, scale, scale);
-    	object.position.set(0.2, -0.2, 0);
-    	scene.add(object);
-    	//addIblToScene();
+        let object = data.scene;
+        let scale = 0.2;
+        object.scale.set(scale, scale, scale);
+        object.position.set(0.2, -0.2, 0);
+        scene.add(object);
+        //addIblToScene();
     });
-//---------------------------------------------
-	function addIblToScene() {
-	    const hdrUrls = [
-	        'specular_right_0.hdr',
-	        'specular_left_0.hdr',
-	        'specular_top_0.hdr',
-	        'specular_bottom_0.hdr',
-	        'specular_front_0.hdr',
-	        'specular_back_0.hdr'
-	    ];
-	    hdrCubeMap = new THREE.HDRCubeTextureLoader()
-	        .setPath( 'https://rawcdn.githack.com/ux3d/glTF-Sample-Environments/4eace30f795fa77f6e059e3b31aa640c08a82133/papermill/specular/' )
-	        .setDataType( THREE.UnsignedByteType )
-	        .load( hdrUrls, function () {
+*/
+    function addIblToScene() {
+        const hdrUrls = [
+            'specular_right_0.hdr',
+            'specular_left_0.hdr',
+            'specular_top_0.hdr',
+            'specular_bottom_0.hdr',
+            'specular_front_0.hdr',
+            'specular_back_0.hdr'
+        ];
+        hdrCubeMap = new THREE.HDRCubeTextureLoader()
+            .setPath( 'https://rawcdn.githack.com/ux3d/glTF-Sample-Environments/4eace30f795fa77f6e059e3b31aa640c08a82133/papermill/specular/' )
+            .setDataType( THREE.UnsignedByteType )
+            .load( hdrUrls, function () {
 
-	            let pmremGenerator = new THREE.PMREMGenerator( renderer );
-	            pmremGenerator.compileCubemapShader();
+                let pmremGenerator = new THREE.PMREMGenerator( renderer );
+                pmremGenerator.compileCubemapShader();
 
-	            hdrCubeRenderTarget = pmremGenerator.fromCubemap( hdrCubeMap );
+                hdrCubeRenderTarget = pmremGenerator.fromCubemap( hdrCubeMap );
 
-	            hdrCubeMap.magFilter = THREE.LinearFilter;
-	            hdrCubeMap.needsUpdate = true;
+                hdrCubeMap.magFilter = THREE.LinearFilter;
+                hdrCubeMap.needsUpdate = true;
 
-	            renderTarget = hdrCubeRenderTarget;
-	            cubeMap = hdrCubeMap;
+                renderTarget = hdrCubeRenderTarget;
+                cubeMap = hdrCubeMap;
 
-	            let newEnvMap = renderTarget ? renderTarget.texture : null;
-	            applyEnvMap(scene, newEnvMap);
-	        } );
-	}
+                let newEnvMap = renderTarget ? renderTarget.texture : null;
+                applyEnvMap(scene, newEnvMap);
+            } );
+    }
     
 }
 
